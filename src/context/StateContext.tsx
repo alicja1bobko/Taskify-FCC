@@ -13,4 +13,3 @@ export const StateContext = createContext<StateContextType>({
 });
 
 export const StateContextProvider = StateContext.Provider;
-export const StateContextConsumer = StateContext.Consumer;
