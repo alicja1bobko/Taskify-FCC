@@ -11,7 +11,7 @@ export const initialState: AppState = {
   todos: [
     {
       id: 1,
-      todo: "elo",
+      todo: "wyrzucić śmieci",
       isDone: true,
     },
   ],
