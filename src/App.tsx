@@ -5,9 +5,14 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import { initialState, TodoReducer } from "./context/reducer";
 import { StateContextProvider } from "./context/StateContext";
+import InputField from "./components/InputField";
 
 const App: React.FC = () => {
   const [state, dispatch] = useReducer(TodoReducer, initialState);
+  const contextValues = {
+    state,
+    dispatch,
+  };
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -27,12 +32,11 @@ const App: React.FC = () => {
   const taskRef = useRef<HTMLInputElement>(null);
 
   return (
-    <StateContextProvider>
+    <StateContextProvider value={contextValues}>
       <div className="App">
         <span className="heading">Taskify</span>
-
-        {/* InputField */}
-        <form
+        <InputField />
+        {/* <form
           className="input"
           onSubmit={(e) => {
             e.preventDefault();
@@ -53,7 +57,7 @@ const App: React.FC = () => {
           <button className="input__submit" type="submit">
             Go
           </button>
-        </form>
+        </form> */}
         {/* end of input field */}
         {/* todo list */}
         <div className="todos">

@@ -1,24 +1,16 @@
 import React from "react";
-import { createContext, useReducer } from "react";
-import { Actions, TodoReducer, initialState, AppState } from "./reducer";
+import { createContext } from "react";
+import { Actions, initialState, AppState } from "./reducer";
 
-const StateContext = createContext<{
+type StateContextType = {
   state: AppState;
   dispatch: React.Dispatch<Actions>;
-}>({
+};
+
+export const StateContext = createContext<StateContextType>({
   state: initialState,
-  dispatch: () => null,
+  dispatch: () => undefined,
 });
 
-export const StateContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}): JSX.Element => {
-  const [state, dispatch] = useReducer(TodoReducer, initialState);
-  return (
-    <StateContext.Provider value={{ state, dispatch }}>
-      {children}
-    </StateContext.Provider>
-  );
-};
+export const StateContextProvider = StateContext.Provider;
+export const StateContextConsumer = StateContext.Consumer;

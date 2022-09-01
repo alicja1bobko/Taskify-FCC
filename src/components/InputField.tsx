@@ -1,19 +1,17 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
+import { StateContext } from "../context/StateContext";
 import "./styles.css";
 
-interface Props {
-  todo: string;
-  setTodo: React.Dispatch<React.SetStateAction<string>>;
-  handleAdd: (e: React.FormEvent) => void;
-}
-
-function InputField({ todo, setTodo, handleAdd }: Props) {
+function InputField() {
+  const stateContext = useContext(StateContext);
+  const { state, dispatch } = stateContext;
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <form
       className="input"
       onSubmit={(e) => {
-        handleAdd(e);
+        e.preventDefault();
+        dispatch({ type: "add", payload: state.todo });
         inputRef.current?.blur();
       }}
     >
@@ -22,8 +20,10 @@ function InputField({ todo, setTodo, handleAdd }: Props) {
         type="input"
         placeholder="Enter a task"
         className="input__box"
-        value={todo}
-        onChange={(e) => setTodo(e.target.value)}
+        value={state.todo}
+        onChange={(e) => {
+          dispatch({ type: "updateInputText", payload: e.target.value });
+        }}
       />
       <button className="input__submit" type="submit">
         Go
