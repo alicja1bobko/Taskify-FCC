@@ -4,6 +4,7 @@ import { Todo } from "../model";
 export type AppState = {
   todo: string;
   todos: Todo[];
+  completedTodos: Todo[];
 };
 
 export const initialState: AppState = {
@@ -11,10 +12,11 @@ export const initialState: AppState = {
   todos: [
     {
       id: 1,
-      todo: "wyrzucić śmieci",
+      todo: "take out trash",
       isDone: true,
     },
   ],
+  completedTodos: [],
 };
 
 export type Actions =
@@ -40,12 +42,20 @@ export type Actions =
   | {
       type: "updateInputText";
       payload: string;
+    }
+  | {
+      type: "setCompletedTasks";
+      payload: {
+        active: Todo[];
+        complete: Todo[];
+      };
     };
 
 export const TodoReducer = (state: AppState, action: Actions): AppState => {
   switch (action.type) {
     case "add":
       return {
+        ...state,
         todo: "",
         todos: [
           ...state.todos,
@@ -82,8 +92,15 @@ export const TodoReducer = (state: AppState, action: Actions): AppState => {
       };
     case "updateInputText":
       return {
+        ...state,
         todo: action.payload,
         todos: state.todos,
+      };
+    case "setCompletedTasks":
+      return {
+        ...state,
+        todos: action.payload.active,
+        completedTodos: action.payload.complete,
       };
     default:
       return state;
