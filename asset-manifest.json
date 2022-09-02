@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Taskify-FCC/static/css/main.ffd2b2ff.css",
+    "main.js": "/Taskify-FCC/static/js/main.d205c03f.js",
+    "index.html": "/Taskify-FCC/index.html",
+    "main.ffd2b2ff.css.map": "/Taskify-FCC/static/css/main.ffd2b2ff.css.map",
+    "main.d205c03f.js.map": "/Taskify-FCC/static/js/main.d205c03f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ffd2b2ff.css",
+    "static/js/main.d205c03f.js"
+  ]
+}
